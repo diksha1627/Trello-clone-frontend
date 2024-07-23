@@ -11,6 +11,8 @@ function ListsContainer() {
   const [newCardTitle, setNewCardTitle] = useState("");
   const [newCardDescription, setNewCardDescription] = useState("");
   const [selectedListId, setSelectedListId] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortOption, setSortOption] = useState("Sort"); // Default sort option
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -193,7 +195,7 @@ function ListsContainer() {
           if (list._id === listId) {
             return {
               ...list,
-              cards: list.cards.filter((card) => card !== cardId),
+              cards: list.cards.filter((card) => card._id !== cardId),
             };
           }
           return list;
@@ -204,8 +206,28 @@ function ListsContainer() {
     }
   };
 
+  const handleSortChange = (event) => {
+    setSortOption(event.target.value);
+  };
+
+  const filteredLists = lists.map((list) => ({
+    ...list,
+    cards: list.cards
+      .filter((card) =>
+        card.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+      .sort((a, b) => {
+        if (sortOption === "newest") {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        } else if (sortOption === "oldest") {
+          return new Date(a.createdAt) - new Date(b.createdAt);
+        }
+        return 0; // This will be the case when sortOption is "sort" or any other default value
+      }),
+  }));
+
   return (
-    <div >
+    <div>
       <Navbar />
       <div className="p-4 bg-white min-h-screen">
         <div className="max-w-6xl mx-auto">
@@ -218,18 +240,18 @@ function ListsContainer() {
               value={newListTitle}
               onChange={(e) => setNewListTitle(e.target.value)}
               placeholder="New List Title"
-              className="p-2 border border-gray-300 rounded-md w-full  w-[85%]"
+              className="p-2 border border-gray-300 rounded-md w-full w-[85%]"
             />
             <button
               type="submit"
-              className="bg-blue-500 text-white w-[15%]  py-2 rounded-md hover:bg-blue-600"
+              className="bg-blue-500 text-white w-[15%] py-2 rounded-md hover:bg-blue-600"
             >
               Create New List
             </button>
           </form>
 
           <form onSubmit={handleCardSubmit} className="mb-4">
-            <label className="text-blue-500 w-[15%] font-bold  py-2 rounded-md ">
+            <label className="text-blue-500 w-[15%] font-bold py-2 rounded-md">
               ADD TASK
             </label>
             <input
@@ -268,6 +290,25 @@ function ListsContainer() {
             </button>
           </form>
 
+          <div className="mb-4 flex items-center gap-2">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search cards by title"
+              className="p-2 border border-gray-300 rounded-md w-full"
+            />
+            <select
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+              className="p-2 border border-gray-300 rounded-md"
+            >
+              <option value="sort" disable>Sort</option>
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+            </select>
+          </div>
+
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="all-lists" direction="horizontal">
               {(provided) => (
@@ -276,7 +317,7 @@ function ListsContainer() {
                   {...provided.droppableProps}
                   className="flex space-x-4"
                 >
-                  {lists.map((list, index) => (
+                  {filteredLists.map((list, index) => (
                     <List
                       key={list._id}
                       list={list}

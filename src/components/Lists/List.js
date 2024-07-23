@@ -13,6 +13,7 @@ function List({ list, index, onDelete, onDeleteCard }) {
     setCardFormVisible(!isCardFormVisible);
   };
 
+
   return (
     <Draggable draggableId={list._id} index={index}>
       {(provided) => (
@@ -46,7 +47,7 @@ function List({ list, index, onDelete, onDeleteCard }) {
                       key={card._id}
                       card={card}
                       index={index}
-                      onDelete={() => onDeleteCard(card, list._id)}
+                      onDelete={() => onDeleteCard(card._id, list._id)}
                     />
                   ))
                 ) : (

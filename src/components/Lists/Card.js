@@ -11,7 +11,7 @@ function Card({ card, index, onDelete }) {
   const [cardDescription, setCardDescription] = useState('');
   const [listId, setListId] = useState('');
   const [date, setDate] = useState('');
-
+  console.log(card._id)
   useEffect(() => {
     setCardTitle(card.title);
     setCardDescription(card.description);
@@ -37,7 +37,7 @@ function Card({ card, index, onDelete }) {
   const fetchCard = async () => {
     try {
       const token = localStorage.getItem('authToken');
-      const res = await axios.get(`http://localhost:5000/api/cards/card/${card}`, {
+      const res = await axios.get(`http://localhost:5000/api/cards/card/${card._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -55,7 +55,7 @@ function Card({ card, index, onDelete }) {
   }, []);
 
   const handleDelete = () => {
-    onDelete(card, listId);
+    onDelete(card._id, listId);
   };
 
   const handleEdit = () => {
@@ -78,7 +78,7 @@ function Card({ card, index, onDelete }) {
 
   return (
     <>
-      <Draggable draggableId={card} index={index}>
+      <Draggable draggableId={card._id} index={index}>
         {(provided) => (
           <div
             ref={provided.innerRef}
