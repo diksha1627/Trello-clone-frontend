@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ListsContainer from './components/Lists/ListsContainer';
+import GoogleLoginButton from './components/Auth/GoogleLoginButton';
+import AuthPage from './components/Auth/AuthPage'; // Make sure this path is correct
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <main className="p-4">
+        <Routes>
+          {/* <Route path="/" element={<GoogleLoginButton />} /> */}
+          <Route path="/" element={<AuthPage />} /> {/* New route for Login and Signup */}
+          <Route path="/dashboard" element={<ListsContainer />} />
+        </Routes>
+      </main>
+    </Router>
   );
 }
 
