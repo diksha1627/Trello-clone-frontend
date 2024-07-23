@@ -1,11 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import google from "../../google.png"
 function GoogleLoginButton() {
-  const navigate = useNavigate();
 
   const googleAuth = () => {
-    window.open(`https://trello-clone-backend-cgik.onrender.com/api/auth/google/`, "_self");
+    window.open(`https://trello-clone-backend-972q.onrender.com/api/auth/google/`, "_self");
   };
 
   return (

@@ -37,7 +37,7 @@ function Card({ card, index, onDelete }) {
   const fetchCard = async () => {
     try {
       const token = localStorage.getItem('authToken');
-      const res = await axios.get(`https://trello-clone-backend-cgik.onrender.com/api/cards/card/${card._id}`, {
+      const res = await axios.get(`https://trello-clone-backend-972q.onrender.com/api/cards/card/${card._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,7 +24,7 @@ function NavBar() {
   }, []);
 
   const logout = () => {
-    window.open('https://trello-clone-backend-cgik.onrender.com/api/auth/logout', '_self');
+    window.open('https://trello-clone-backend-972q.onrender.com/api/auth/logout', '_self');
   };
 
   return (

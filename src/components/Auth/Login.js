@@ -9,7 +9,7 @@ function Login({ onToggle }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://trello-clone-backend-cgik.onrender.com/api/auth/login', { email, password });
+      const res = await axios.post('https://trello-clone-backend-972q.onrender.com/api/auth/login', { email, password });
       localStorage.setItem('authToken', res.data.token);
       window.location.href = '/dashboard'; // Redirect to dashboard or wherever
     } catch (err) {

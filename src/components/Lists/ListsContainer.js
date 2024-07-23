@@ -28,7 +28,7 @@ function ListsContainer() {
   const fetchLists = async () => {
     try {
       const token = localStorage.getItem("authToken");
-      const res = await axios.get("https://trello-clone-backend-cgik.onrender.com/api/lists", {
+      const res = await axios.get("https://trello-clone-backend-972q.onrender.com/api/lists", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,7 +50,7 @@ function ListsContainer() {
   const onDragEnd = async (result) => {
     if (!result.destination) return;
 
-    const { source, destination, draggableId } = result;
+    const { source, destination } = result;
 
     if (
       source.droppableId === destination.droppableId &&
@@ -81,7 +81,7 @@ function ListsContainer() {
     try {
       const token = localStorage.getItem("authToken");
       await axios.put(
-        "https://trello-clone-backend-cgik.onrender.com/api/cards/reorder",
+        "https://trello-clone-backend-972q.onrender.com/api/cards/reorder",
         { movedCard, source, destination },
         {
           headers: {
@@ -104,7 +104,7 @@ function ListsContainer() {
     try {
       const token = localStorage.getItem("authToken");
       for (const list of defaultLists) {
-        await axios.post("https://trello-clone-backend-cgik.onrender.com/api/lists", list, {
+        await axios.post("https://trello-clone-backend-972q.onrender.com/api/lists", list, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -124,7 +124,7 @@ function ListsContainer() {
     try {
       const token = localStorage.getItem("authToken");
       await axios.post(
-        "https://trello-clone-backend-cgik.onrender.com/api/lists",
+        "https://trello-clone-backend-972q.onrender.com/api/lists",
         { title: newListTitle },
         {
           headers: {
@@ -147,7 +147,7 @@ function ListsContainer() {
     try {
       const token = localStorage.getItem("authToken");
       await axios.post(
-        "https://trello-clone-backend-cgik.onrender.com/api/cards",
+        "https://trello-clone-backend-972q.onrender.com/api/cards",
         {
           title: newCardTitle,
           description: newCardDescription,
@@ -172,7 +172,7 @@ function ListsContainer() {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("authToken");
-      await axios.delete(`https://trello-clone-backend-cgik.onrender.com/api/lists/${id}`, {
+      await axios.delete(`https://trello-clone-backend-972q.onrender.com/api/lists/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -186,7 +186,7 @@ function ListsContainer() {
   const handleDeleteCard = async (cardId, listId) => {
     try {
       const token = localStorage.getItem("authToken");
-      await axios.delete(`https://trello-clone-backend-cgik.onrender.com/api/cards/${cardId}`, {
+      await axios.delete(`https://trello-clone-backend-972q.onrender.com/api/cards/${cardId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -206,9 +206,9 @@ function ListsContainer() {
     }
   };
 
-  const handleSortChange = (event) => {
-    setSortOption(event.target.value);
-  };
+  // const handleSortChange = (event) => {
+  //   setSortOption(event.target.value);
+  // };
 
   const filteredLists = lists.map((list) => ({
     ...list,
