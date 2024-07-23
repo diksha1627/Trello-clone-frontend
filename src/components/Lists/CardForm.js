@@ -10,7 +10,7 @@ const CardForm = ({ card, onSave, onCancel }) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('authToken');
-      await axios.put(`http://localhost:5000/api/cards/${card._id}`, 
+      await axios.put(`https://trello-clone-backend-cgik.onrender.com/api/cards/${card._id}`, 
         { title, description },
         { headers: { Authorization: `Bearer ${token}` } }
       );

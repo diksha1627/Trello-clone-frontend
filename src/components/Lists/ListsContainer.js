@@ -28,7 +28,7 @@ function ListsContainer() {
   const fetchLists = async () => {
     try {
       const token = localStorage.getItem("authToken");
-      const res = await axios.get("http://localhost:5000/api/lists", {
+      const res = await axios.get("https://trello-clone-backend-cgik.onrender.com/api/lists", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -81,7 +81,7 @@ function ListsContainer() {
     try {
       const token = localStorage.getItem("authToken");
       await axios.put(
-        "http://localhost:5000/api/cards/reorder",
+        "https://trello-clone-backend-cgik.onrender.com/api/cards/reorder",
         { movedCard, source, destination },
         {
           headers: {
@@ -104,7 +104,7 @@ function ListsContainer() {
     try {
       const token = localStorage.getItem("authToken");
       for (const list of defaultLists) {
-        await axios.post("http://localhost:5000/api/lists", list, {
+        await axios.post("https://trello-clone-backend-cgik.onrender.com/api/lists", list, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -124,7 +124,7 @@ function ListsContainer() {
     try {
       const token = localStorage.getItem("authToken");
       await axios.post(
-        "http://localhost:5000/api/lists",
+        "https://trello-clone-backend-cgik.onrender.com/api/lists",
         { title: newListTitle },
         {
           headers: {
@@ -147,7 +147,7 @@ function ListsContainer() {
     try {
       const token = localStorage.getItem("authToken");
       await axios.post(
-        "http://localhost:5000/api/cards",
+        "https://trello-clone-backend-cgik.onrender.com/api/cards",
         {
           title: newCardTitle,
           description: newCardDescription,
@@ -172,7 +172,7 @@ function ListsContainer() {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("authToken");
-      await axios.delete(`http://localhost:5000/api/lists/${id}`, {
+      await axios.delete(`https://trello-clone-backend-cgik.onrender.com/api/lists/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -186,7 +186,7 @@ function ListsContainer() {
   const handleDeleteCard = async (cardId, listId) => {
     try {
       const token = localStorage.getItem("authToken");
-      await axios.delete(`http://localhost:5000/api/cards/${cardId}`, {
+      await axios.delete(`https://trello-clone-backend-cgik.onrender.com/api/cards/${cardId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -233,7 +233,7 @@ function ListsContainer() {
         <div className="max-w-6xl mx-auto">
           <form
             onSubmit={handleListSubmit}
-            className="mb-4 flex justify-center items-center gap-2 w-[100%]"
+            className="mb-4 flex flex-col lg:flex-row justify-center items-center gap-2 w-[100%]"
           >
             <input
               type="text"
@@ -244,7 +244,7 @@ function ListsContainer() {
             />
             <button
               type="submit"
-              className="bg-blue-500 text-white w-[15%] py-2 rounded-md hover:bg-blue-600"
+              className="bg-blue-500 text-white lg:w-[15%] w-[90%] py-2 rounded-md hover:bg-blue-600"
             >
               Create New List
             </button>

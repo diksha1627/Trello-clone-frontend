@@ -5,7 +5,7 @@ function GoogleLoginButton() {
   const navigate = useNavigate();
 
   const googleAuth = () => {
-    window.open(`http://localhost:5000/api/auth/google/`, "_self");
+    window.open(`https://trello-clone-backend-cgik.onrender.com/api/auth/google/`, "_self");
   };
 
   return (

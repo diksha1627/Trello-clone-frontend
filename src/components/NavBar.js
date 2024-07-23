@@ -24,7 +24,7 @@ function NavBar() {
   }, []);
 
   const logout = () => {
-    window.open('http://localhost:5000/api/auth/logout', '_self');
+    window.open('https://trello-clone-backend-cgik.onrender.com/api/auth/logout', '_self');
   };
 
   return (
